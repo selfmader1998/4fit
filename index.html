@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>4FIT | 사주 궁합 프라이빗 매칭</title>
     
-    <link rel="icon" type="image/png" href="4FIT심볼마크_2.png">
-    <link rel="apple-touch-icon" href="4FIT심볼마크_2.png">
+    <!-- 💡 최적화 1: 첫 화면 이미지 미리 불러오기 (로딩 속도 개선) -->
+    <link rel="preload" as="image" href="logo.png">
+    <link rel="preload" as="image" href="red_string.png">
+
+    <!-- 💡 대표님이 수정하신 아이콘 파일명 그대로 유지 -->
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
     
     <style>
-        /* 💡 수정됨: word-break: keep-all; 을 추가하여 한글이 한 글자씩 뚝뚝 떨어지지 않고 단어 단위로 예쁘게 줄바꿈되도록 강제합니다. */
         html, body { 
             font-family: 'Pretendard', sans-serif; 
             overflow-x: hidden !important; 
@@ -34,17 +38,16 @@
         }
     </style>
 </head>
-<!-- 💡 수정됨: break-words를 모두 제거하고 break-keep으로 복구했습니다. -->
 <body class="bg-white text-slate-900 antialiased selection:bg-rose-100 selection:text-rose-900 break-keep">
 
-<!-- 전체 래퍼 -->
 <div class="w-full flex flex-col min-h-screen overflow-x-hidden">
 
     <!-- Header / Navbar -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-100 w-full">
         <div class="max-w-7xl mx-auto px-5 md:px-8 h-16 md:h-20 flex items-center justify-between">
             <a href="#" class="flex items-center gap-2 transition hover:opacity-80">
-                <img src="logo.png" alt="4FIT 로고" class="h-7 md:h-10 w-auto object-contain">
+                <!-- 💡 최우선 로딩 속성 추가 -->
+                <img src="logo.png" alt="4FIT 로고" fetchpriority="high" class="h-7 md:h-10 w-auto object-contain">
             </a>
             <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
                 <a href="#features" class="hover:text-slate-900 transition">서비스 특징</a>
@@ -66,7 +69,8 @@
             
             <div class="lg:col-span-6 flex justify-center lg:justify-end w-full">
                 <div class="w-4/5 max-w-[280px] lg:max-w-[560px] flex items-center justify-center mx-auto">
-                    <img src="red_string.png" alt="붉은 실로 이어진 인연" class="w-full h-auto object-contain drop-shadow-sm">
+                    <!-- 💡 최우선 로딩 속성 추가 -->
+                    <img src="red_string.png" alt="붉은 실로 이어진 인연" fetchpriority="high" class="w-full h-auto object-contain drop-shadow-sm">
                 </div>
             </div>
             
@@ -123,7 +127,8 @@
                         </p>
                     </div>
                     <div class="w-full max-w-[200px] md:max-w-[260px] flex justify-center mx-auto">
-                        <img src="matchUI.png" alt="매칭 성공 앱 화면" class="w-full h-auto drop-shadow-xl object-contain">
+                        <!-- 💡 최적화 2: 지연 로딩 (loading="lazy") 적용 -->
+                        <img src="matchUI.png" alt="매칭 성공 앱 화면" loading="lazy" decoding="async" class="w-full h-auto drop-shadow-xl object-contain">
                     </div>
                 </div>
 
@@ -137,7 +142,7 @@
                         </p>
                     </div>
                     <div class="w-full max-w-[200px] md:max-w-[260px] flex justify-center mx-auto">
-                        <img src="sajuUI.png" alt="사주 분석 리포트 화면" class="w-full h-auto drop-shadow-xl rounded-2xl object-contain border border-slate-100">
+                        <img src="sajuUI.png" alt="사주 분석 리포트 화면" loading="lazy" decoding="async" class="w-full h-auto drop-shadow-xl rounded-2xl object-contain border border-slate-100">
                     </div>
                 </div>
 
@@ -151,7 +156,7 @@
                         </p>
                     </div>
                     <div class="w-full max-w-[220px] md:max-w-[280px] flex justify-center mx-auto">
-                        <img src="safeMatch.png" alt="프라이빗 매칭 보호 일러스트" class="w-full h-auto drop-shadow-lg object-contain">
+                        <img src="safeMatch.png" alt="프라이빗 매칭 보호 일러스트" loading="lazy" decoding="async" class="w-full h-auto drop-shadow-lg object-contain">
                     </div>
                 </div>
             </div>
@@ -164,7 +169,7 @@
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 
                 <div class="flex flex-col items-center lg:items-start text-center lg:text-left space-y-5">
-                    <img src="logo.png" alt="4FIT 로고" class="w-40 md:w-56 h-auto drop-shadow-sm">
+                    <img src="logo.png" alt="4FIT 로고" loading="lazy" decoding="async" class="w-40 md:w-56 h-auto drop-shadow-sm">
                     <div class="space-y-2">
                         <h2 class="hand-title text-3xl md:text-5xl font-bold text-slate-900">사전 예약하기</h2>
                         <p class="text-slate-600 text-sm md:text-lg leading-relaxed">
@@ -177,13 +182,11 @@
                 <div class="w-full box-border">
                     <form id="mainWaitlistForm" class="bg-white p-6 md:p-10 rounded-[2rem] border border-slate-200/80 shadow-2xl shadow-slate-200/50 space-y-6 w-full max-w-md mx-auto lg:max-w-full box-border">
                         
-                        <!-- 1. 이름 -->
                         <div class="space-y-2">
                             <label for="userName" class="block text-sm font-bold text-slate-900">이름</label>
                             <input type="text" id="userName" required placeholder="이름을 입력해주세요" class="w-full px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm transition box-border">
                         </div>
 
-                        <!-- 2. 성별 -->
                         <div class="space-y-2">
                             <label class="block text-sm font-bold text-slate-900">성별</label>
                             <div class="flex items-center gap-6 px-1">
@@ -198,7 +201,6 @@
                             </div>
                         </div>
 
-                        <!-- 3. 생년월일 -->
                         <div class="space-y-2">
                             <label class="block text-sm font-bold text-slate-900">생년월일 (양력)</label>
                             <div class="grid grid-cols-3 gap-2 w-full box-border">
@@ -208,7 +210,6 @@
                             </div>
                         </div>
 
-                        <!-- 4. 태어난 시간 -->
                         <div class="space-y-2">
                             <label class="block text-sm font-bold text-slate-900">태어난 시간</label>
                             <div class="flex items-center gap-3 w-full box-border">
@@ -220,13 +221,11 @@
                             </div>
                         </div>
 
-                        <!-- 5. 이메일 주소 -->
                         <div class="space-y-2">
                             <label for="mainEmail" class="block text-sm font-bold text-slate-900">이메일 주소</label>
                             <input type="email" id="mainEmail" required placeholder="you@example.com" class="w-full px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm transition box-border">
                         </div>
 
-                        <!-- 제출 버튼 -->
                         <div class="pt-2">
                             <button type="submit" class="w-full bg-[#E75B8D] hover:opacity-90 text-white font-bold px-5 py-4 rounded-xl transition text-base shadow-md box-border">
                                 사전 예약 완료하기
@@ -244,8 +243,9 @@
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             <div class="space-y-3">
                 <div class="flex items-center gap-2 opacity-80 hover:opacity-100 transition grayscale hover:grayscale-0">
-                    <img src="logo.png" alt="4FIT 로고" class="h-5 w-auto object-contain">
+                    <img src="logo.png" alt="4FIT 로고" loading="lazy" decoding="async" class="h-5 w-auto object-contain">
                 </div>
+                <!-- 💡 대표님이 직접 작성하신 회사 정보 복구 -->
                 <p class="text-slate-500 text-xs md:text-sm leading-relaxed">
                     회사명: destiny finders | 대표자: 박형민<br>
                     사업자등록번호: 121-41-67891 | 통신판매업신고: 제2026-서울노원-1025호<br>
