@@ -12,13 +12,14 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
     
-    <!-- 💡 수정됨: html, body에 직접 width 100%와 overflow-x hidden을 걸어 우측 짤림/가로 스크롤 원천 차단 -->
     <style>
+        /* 💡 수정됨: word-break: keep-all; 을 추가하여 한글이 한 글자씩 뚝뚝 떨어지지 않고 단어 단위로 예쁘게 줄바꿈되도록 강제합니다. */
         html, body { 
             font-family: 'Pretendard', sans-serif; 
             overflow-x: hidden !important; 
             width: 100%; 
             position: relative;
+            word-break: keep-all; 
         }
         .hand-title { font-family: 'Gowun Dodum', sans-serif; }
         input[type="time"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity: 0.6; }
@@ -33,10 +34,11 @@
         }
     </style>
 </head>
-<body class="bg-white text-slate-900 antialiased selection:bg-rose-100 selection:text-rose-900">
+<!-- 💡 수정됨: break-words를 모두 제거하고 break-keep으로 복구했습니다. -->
+<body class="bg-white text-slate-900 antialiased selection:bg-rose-100 selection:text-rose-900 break-keep">
 
 <!-- 전체 래퍼 -->
-<div class="w-full flex flex-col min-h-screen">
+<div class="w-full flex flex-col min-h-screen overflow-x-hidden">
 
     <!-- Header / Navbar -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-100 w-full">
@@ -63,22 +65,20 @@
         <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
             <div class="lg:col-span-6 flex justify-center lg:justify-end w-full">
-                <!-- 💡 이미지 최대 너비를 기기 화면에 맞게 최적화 -->
                 <div class="w-4/5 max-w-[280px] lg:max-w-[560px] flex items-center justify-center mx-auto">
                     <img src="red_string.png" alt="붉은 실로 이어진 인연" class="w-full h-auto object-contain drop-shadow-sm">
                 </div>
             </div>
             
             <div class="lg:col-span-6 space-y-5 text-center lg:text-left w-full">
-                <!-- 💡 수정됨: break-keep 삭제, 글씨 튀어나감 방지를 위해 break-words 적용 및 폰트 사이즈 반응형 세분화 -->
-                <h1 class="hand-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 leading-[1.4] break-words">
+                <h1 class="hand-title text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 leading-[1.4]">
                     낭비하는 소개팅은 이제 그만!<br class="block">
                     사주로 보이지 않는 <span class="text-[#E75B8D]">FIT</span>을 찾다
                 </h1>
                 
-                <p class="text-slate-600 text-sm sm:text-base lg:text-lg max-w-md mx-auto lg:mx-0 leading-relaxed break-words px-2 lg:px-0">
-                    만나보면 별로인 첫 만남은 이제 그만.<br>
-                    나를 이해하고 나와 가장 잘 맞는 인연을 소개받아 보세요.<br>
+                <p class="text-slate-600 text-sm sm:text-base lg:text-lg max-w-md mx-auto lg:mx-0 leading-relaxed px-2 lg:px-0">
+                    만나보면 별로인 첫 만남은 이제 그만.<br class="hidden sm:block">
+                    나를 이해하고 나와 가장 잘 맞는 인연을 소개받아 보세요.<br class="hidden sm:block">
                     <span class="font-bold text-[#E75B8D]">4FIT</span>은 가입 즉시, 사주 궁합이 우수한 상대와 매칭됩니다.
                 </p>
 
@@ -104,10 +104,10 @@
     <section id="features" class="py-20 md:py-24 px-5 md:px-8 bg-slate-50 border-t border-slate-100 w-full box-border">
         <div class="max-w-5xl mx-auto w-full">
             <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16 space-y-3 px-2">
-                <h2 class="hand-title text-2xl md:text-4xl font-bold text-slate-900 break-words">
+                <h2 class="hand-title text-2xl md:text-4xl font-bold text-slate-900">
                     완벽한 인연을 찾아내는 3가지 기준
                 </h2>
-                <p class="text-slate-600 text-sm md:text-base break-words">
+                <p class="text-slate-600 text-sm md:text-base">
                     불필요한 과정은 덜어내고, 진짜 인연의 정확도만 극적으로 높였습니다.
                 </p>
             </div>
@@ -116,9 +116,9 @@
                 <div class="bg-white p-6 md:p-12 rounded-3xl border border-slate-200/60 shadow-sm flex flex-col-reverse md:flex-row items-center justify-between gap-8 box-border">
                     <div class="space-y-3 flex-1 text-center md:text-left w-full">
                         <h3 class="font-bold text-xl md:text-2xl text-slate-900">시간과 감정의 낭비 차단</h3>
-                        <p class="text-slate-600 text-sm md:text-lg leading-relaxed break-words">
-                            프로필 보기, 좋아요, 매칭 대기, 어색한 첫 마디까지…<br>
-                            기존 소개팅 앱의 지치고 복잡한 과정을 모두 없앴습니다.<br>
+                        <p class="text-slate-600 text-sm md:text-lg leading-relaxed">
+                            프로필 보기, 좋아요, 매칭 대기, 어색한 첫 마디까지…<br class="hidden sm:block">
+                            기존 소개팅 앱의 지치고 복잡한 과정을 모두 없앴습니다.<br class="hidden sm:block">
                             4FIT은 가입 즉시, 사주 궁합이 가장 완벽한 인연을 연결해 드립니다.
                         </p>
                     </div>
@@ -130,9 +130,9 @@
                 <div class="bg-white p-6 md:p-12 rounded-3xl border border-slate-200/60 shadow-sm flex flex-col-reverse md:flex-row-reverse items-center justify-between gap-8 box-border">
                     <div class="space-y-3 flex-1 text-center md:text-left w-full">
                         <h3 class="font-bold text-xl md:text-2xl text-slate-900">정밀한 사주 궁합 분석</h3>
-                        <p class="text-slate-600 text-sm md:text-lg leading-relaxed break-words">
-                            AI가 대충 봐주는 사주는 이제 그만.<br>
-                            사주를 직접 배운 개발자가 만든 정교한 알고리즘 매칭.<br>
+                        <p class="text-slate-600 text-sm md:text-lg leading-relaxed">
+                            AI가 대충 봐주는 사주는 이제 그만.<br class="hidden sm:block">
+                            사주를 직접 배운 개발자가 만든 정교한 알고리즘 매칭.<br class="hidden sm:block">
                             성공 확률이 가장 높고 서로에게 꼭 맞는 인연을 엄선합니다.
                         </p>
                     </div>
@@ -144,9 +144,9 @@
                 <div class="bg-white p-6 md:p-12 rounded-3xl border border-slate-200/60 shadow-sm flex flex-col-reverse md:flex-row items-center justify-between gap-8 box-border">
                     <div class="space-y-3 flex-1 text-center md:text-left w-full">
                         <h3 class="font-bold text-xl md:text-2xl text-slate-900">프로필 노출 제로! 프라이빗</h3>
-                        <p class="text-slate-600 text-sm md:text-lg leading-relaxed break-words">
-                            매칭 되기까지 불특정 다수에게 노출되는 프로필은 NO!<br>
-                            4FIT은 매칭이 된 인연에게만 프로필이 공개됩니다.<br>
+                        <p class="text-slate-600 text-sm md:text-lg leading-relaxed">
+                            매칭 되기까지 불특정 다수에게 노출되는 프로필은 NO!<br class="hidden sm:block">
+                            4FIT은 매칭이 된 인연에게만 프로필이 공개됩니다.<br class="hidden sm:block">
                             얼굴 팔릴 걱정없이 운명적인 만남을 찾아보세요.
                         </p>
                     </div>
@@ -167,8 +167,8 @@
                     <img src="logo.png" alt="4FIT 로고" class="w-40 md:w-56 h-auto drop-shadow-sm">
                     <div class="space-y-2">
                         <h2 class="hand-title text-3xl md:text-5xl font-bold text-slate-900">사전 예약하기</h2>
-                        <p class="text-slate-600 text-sm md:text-lg leading-relaxed break-words">
-                            입력하신 정보는 서비스 출시 알림에만 안전하게 사용됩니다.<br>
+                        <p class="text-slate-600 text-sm md:text-lg leading-relaxed">
+                            입력하신 정보는 서비스 출시 알림에만 안전하게 사용됩니다.<br class="hidden sm:block">
                             운명의 상대를 만날 준비가 되셨나요?
                         </p>
                     </div>
@@ -246,7 +246,7 @@
                 <div class="flex items-center gap-2 opacity-80 hover:opacity-100 transition grayscale hover:grayscale-0">
                     <img src="logo.png" alt="4FIT 로고" class="h-5 w-auto object-contain">
                 </div>
-                <p class="text-slate-500 text-xs md:text-sm leading-relaxed break-words">
+                <p class="text-slate-500 text-xs md:text-sm leading-relaxed">
                     상호명: (주)포핏 | 대표자: 홍길동<br>
                     사업자등록번호: 123-45-67890 | 통신판매업신고: 제2026-서울홍대-0000호<br>
                     주소: 서울특별시 마포구 홍익로 123, 4층 4FIT<br>
