@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>4FIT | 사주 궁합 프라이빗 매칭</title>
     
+    <!-- 파비콘 (브라우저 탭 아이콘) 및 모바일 홈 화면 아이콘 적용 -->
     <link rel="icon" type="image/png" href="4FIT심볼마크_2.png">
     <link rel="apple-touch-icon" href="4FIT심볼마크_2.png">
 
@@ -14,14 +15,25 @@
     <style>
         body { font-family: 'Pretendard', sans-serif; }
         .hand-title { font-family: 'Gowun Dodum', sans-serif; }
+        /* 시간 입력 폼 아이콘 디자인 정리 */
         input[type="time"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity: 0.6; }
+        
+        /* 💡 추가됨: 숫자 입력칸(생년월일)의 불필요한 위아래 화살표 공간을 없애어 글자 잘림 방지 */
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
     </style>
 </head>
-<!-- 💡 break-keep 추가: 한글 단어가 뚝뚝 끊어지지 않게 보호 -->
-<body class="bg-white text-slate-900 antialiased selection:bg-rose-100 selection:text-rose-900 break-keep">
+<!-- 💡 추가됨: overflow-x-hidden으로 모바일 가로 쏠림/잘림 완벽 차단 -->
+<body class="bg-white text-slate-900 antialiased selection:bg-rose-100 selection:text-rose-900 break-keep overflow-x-hidden w-full">
 
     <!-- Header / Navbar -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-100">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-100 w-full">
         <div class="max-w-7xl mx-auto px-6 md:px-8 h-20 flex items-center justify-between">
             <a href="#" class="flex items-center gap-2 transition hover:opacity-80">
                 <img src="logo.png" alt="4FIT 로고" class="h-8 md:h-10 w-auto object-contain">
@@ -33,7 +45,7 @@
                 <a href="#community" class="hover:text-slate-900 transition">공지사항</a>
             </nav>
             <div>
-                <a href="#apply" class="bg-[#E75B8D] text-white hover:opacity-90 text-sm font-semibold px-5 py-2.5 rounded-full transition shadow-sm">
+                <a href="#apply" class="bg-[#E75B8D] text-white hover:opacity-90 text-sm font-semibold px-5 py-2.5 rounded-full transition shadow-sm whitespace-nowrap">
                     사전 예약하기
                 </a>
             </div>
@@ -41,21 +53,19 @@
     </header>
 
     <!-- Hero Section -->
-    <!-- 💡 모바일에서는 강제 세로 중앙정렬(min-h-screen)을 해제하여 이미지가 위로 잘리지 않게 보호 -->
-    <section class="pt-32 pb-16 lg:pt-32 lg:pb-20 px-6 md:px-8 lg:min-h-screen flex items-center relative overflow-hidden">
+    <section class="pt-32 pb-16 lg:pt-32 lg:pb-20 px-6 md:px-8 lg:min-h-screen flex items-center relative overflow-hidden w-full">
         <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
-            <!-- 💡 모바일 이미지 크기 조정 -->
-            <div class="lg:col-span-6 flex justify-center lg:justify-end">
+            <div class="lg:col-span-6 flex justify-center lg:justify-end w-full">
                 <div class="w-full max-w-[280px] lg:max-w-[560px] flex items-center justify-center p-2 lg:p-4 mx-auto">
                     <img src="red_string.png" alt="붉은 실로 이어진 인연" class="w-full h-auto object-contain">
                 </div>
             </div>
             
-            <div class="lg:col-span-6 space-y-6 text-center lg:text-left">
-                <!-- 💡 break-keep 덕분에 '그만!'이 예쁘게 줄바꿈됨 -->
+            <div class="lg:col-span-6 space-y-6 text-center lg:text-left w-full">
+                <!-- 💡 수정됨: 모바일에서 텍스트가 자연스럽게 줄바꿈 되도록 br 태그 최적화 -->
                 <h1 class="hand-title text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 leading-[1.35]">
-                    낭비하는 소개팅은 이제 그만! <br>사주로 보이지 않는 <span class="text-[#E75B8D]">FIT</span>을 찾다
+                    낭비하는 소개팅은 이제 그만! <br class="hidden sm:block">사주로 보이지 않는 <span class="text-[#E75B8D]">FIT</span>을 찾다
                 </h1>
                 
                 <p class="text-slate-600 text-base lg:text-lg max-w-md mx-auto lg:mx-0 leading-relaxed">
@@ -64,17 +74,18 @@
                     <span class="font-bold text-[#E75B8D]">4FIT</span>은 가입 즉시, 사주 궁합이 우수한 상대와 매칭됩니다.
                 </p>
 
-                <div class="space-y-4 pt-2 flex flex-col items-center lg:items-start">
+                <div class="space-y-4 pt-2 flex flex-col items-center lg:items-start w-full">
                     <form id="heroForm" class="flex items-center gap-2 w-full max-w-md">
-                        <input type="email" id="heroEmail" required placeholder="you@example.com" class="flex-1 px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-slate-900 text-sm shadow-sm transition">
-                        <button type="submit" class="bg-[#E75B8D] hover:opacity-90 text-white font-medium px-5 py-3.5 rounded-xl transition text-sm shrink-0 shadow-md">
+                        <!-- 💡 추가됨: min-w-0 속성으로 인풋 창이 화면 밖으로 삐져나가는 것 방지 -->
+                        <input type="email" id="heroEmail" required placeholder="you@example.com" class="flex-1 min-w-0 px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-slate-900 text-sm shadow-sm transition">
+                        <button type="submit" class="bg-[#E75B8D] shrink-0 hover:opacity-90 text-white font-medium px-5 py-3.5 rounded-xl transition text-sm shadow-md">
                             사전 예약하기
                         </button>
                     </form>
                     
                     <div class="flex items-center gap-2 pt-1 text-sm font-medium text-slate-600">
-                        <span class="inline-block w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
-                        <span>벌써 <strong id="waitlistCount" class="text-slate-900 font-bold">121</strong>명이 사전 예약했어요!</span>
+                        <span class="inline-block w-2 h-2 rounded-full bg-rose-500 animate-pulse shrink-0"></span>
+                        <span class="truncate">벌써 <strong id="waitlistCount" class="text-slate-900 font-bold">121</strong>명이 사전 예약했어요!</span>
                     </div>
                 </div>
             </div>
@@ -83,8 +94,8 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-24 px-6 md:px-8 bg-slate-50 border-t border-slate-100">
-        <div class="max-w-5xl mx-auto">
+    <section id="features" class="py-24 px-6 md:px-8 bg-slate-50 border-t border-slate-100 w-full">
+        <div class="max-w-5xl mx-auto w-full">
             <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
                 <h2 class="hand-title text-3xl md:text-4xl font-bold text-slate-900">
                     완벽한 인연을 찾아내는 3가지 기준
@@ -141,8 +152,8 @@
     </section>
 
     <!-- 상세 사전 예약 폼 섹션 -->
-    <section id="apply" class="py-24 px-6 md:px-8 bg-white">
-        <div class="max-w-6xl mx-auto">
+    <section id="apply" class="py-24 px-6 md:px-8 bg-white w-full">
+        <div class="max-w-6xl mx-auto w-full">
             <div class="grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
                 
                 <div class="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
@@ -156,13 +167,14 @@
                     </div>
                 </div>
 
-                <div>
-                    <form id="mainWaitlistForm" class="bg-white p-6 md:p-10 rounded-[2rem] border border-slate-200/80 shadow-2xl shadow-slate-200/60 space-y-6">
+                <div class="w-full">
+                    <form id="mainWaitlistForm" class="bg-white p-6 md:p-10 rounded-[2rem] border border-slate-200/80 shadow-2xl shadow-slate-200/60 space-y-6 w-full">
                         
                         <!-- 1. 이름 -->
                         <div class="space-y-2">
                             <label for="userName" class="block text-sm font-bold text-slate-900">이름</label>
-                            <input type="text" id="userName" required placeholder="이름을 입력해주세요" class="w-full px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm transition">
+                            <!-- 💡 min-w-0 추가 -->
+                            <input type="text" id="userName" required placeholder="이름을 입력해주세요" class="w-full min-w-0 px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm transition">
                         </div>
 
                         <!-- 2. 성별 -->
@@ -180,21 +192,23 @@
                             </div>
                         </div>
 
-                        <!-- 3. 생년월일 (💡 모바일 여백 최소화 및 글자 가운데 정렬) -->
+                        <!-- 3. 생년월일 -->
                         <div class="space-y-2">
                             <label class="block text-sm font-bold text-slate-900">생년월일 (양력)</label>
-                            <div class="grid grid-cols-3 gap-2 md:gap-3">
-                                <input type="number" id="birthYear" required placeholder="생년" class="w-full px-2 md:px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm md:text-base text-center transition">
-                                <input type="number" id="birthMonth" required placeholder="월" min="1" max="12" class="w-full px-2 md:px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm md:text-base text-center transition">
-                                <input type="number" id="birthDay" required placeholder="일" min="1" max="31" class="w-full px-2 md:px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm md:text-base text-center transition">
+                            <div class="grid grid-cols-3 gap-2 md:gap-3 w-full">
+                                <!-- 💡 수정됨: min-w-0 추가, 패딩 최소화(px-1.5)로 공간 확보, 중앙정렬 -->
+                                <input type="number" id="birthYear" required placeholder="생년" class="w-full min-w-0 px-1.5 md:px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm md:text-base text-center transition">
+                                <input type="number" id="birthMonth" required placeholder="월" min="1" max="12" class="w-full min-w-0 px-1.5 md:px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm md:text-base text-center transition">
+                                <input type="number" id="birthDay" required placeholder="일" min="1" max="31" class="w-full min-w-0 px-1.5 md:px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm md:text-base text-center transition">
                             </div>
                         </div>
 
                         <!-- 4. 태어난 시간 -->
                         <div class="space-y-2">
                             <label class="block text-sm font-bold text-slate-900">태어난 시간</label>
-                            <div class="flex items-center gap-3 md:gap-4">
-                                <input type="time" id="birthTime" required class="flex-1 px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm transition disabled:opacity-50 disabled:bg-slate-100 disabled:cursor-not-allowed">
+                            <div class="flex items-center gap-3 md:gap-4 w-full">
+                                <!-- 💡 min-w-0 추가 -->
+                                <input type="time" id="birthTime" required class="flex-1 min-w-0 px-3 md:px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm transition disabled:opacity-50 disabled:bg-slate-100 disabled:cursor-not-allowed">
                                 <label class="flex items-center gap-2 text-sm font-medium text-slate-600 cursor-pointer shrink-0 py-2">
                                     <input type="checkbox" id="unknownTime" class="w-4 h-4 rounded accent-[#E75B8D] cursor-pointer">
                                     생시 모름
@@ -205,7 +219,8 @@
                         <!-- 5. 이메일 주소 -->
                         <div class="space-y-2">
                             <label for="mainEmail" class="block text-sm font-bold text-slate-900">이메일 주소</label>
-                            <input type="email" id="mainEmail" required placeholder="you@example.com" class="w-full px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm transition">
+                            <!-- 💡 min-w-0 추가 -->
+                            <input type="email" id="mainEmail" required placeholder="you@example.com" class="w-full min-w-0 px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm transition">
                         </div>
 
                         <!-- 제출 버튼 -->
@@ -222,7 +237,7 @@
     </section>
 
     <!-- Footer 영역 -->
-    <footer class="bg-slate-50 border-t border-slate-200 pt-16 pb-10 px-6 md:px-8">
+    <footer class="bg-slate-50 border-t border-slate-200 pt-16 pb-10 px-6 md:px-8 w-full">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
             <div class="space-y-4">
                 <div class="flex items-center gap-2 opacity-80 hover:opacity-100 transition grayscale hover:grayscale-0">
@@ -248,7 +263,7 @@
     </footer>
 
     <script>
-        // 구글 웹 앱 배포 URL 세팅
+        // 🚀 구글 웹 앱 배포 URL 세팅
         const scriptURL = 'https://script.google.com/macros/s/AKfycbyu2LJMVjHr6MmT98F4lmwRaMLiYjW5WDSmAzYdUy6sFsbsaveXv3f82x4dj36-e9UR/exec';
         const baseCount = 121; 
 
@@ -306,6 +321,7 @@
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalBtnText = submitBtn.innerText;
             const userName = document.getElementById('userName').value;
+            
             const gender = document.querySelector('input[name="gender"]:checked').value;
             
             const year = document.getElementById('birthYear').value;
